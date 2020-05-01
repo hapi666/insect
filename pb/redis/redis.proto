@@ -1,0 +1,37 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package redis;
+
+service DBService {
+    rpc PushQueue(PushQueueRequest) returns (google.protobuf.Empty){};
+    rpc PopQueue(google.protobuf.Empty) returns (PopQueueReply){};
+    rpc RangeQueue(google.protobuf.Empty) returns (RangeReply){};
+    rpc SisMember(SisMemberRequest) returns (SisMemberReply){};
+    rpc SadD(SadDRequest) returns (google.protobuf.Empty){};
+}
+
+message PushQueueRequest{
+    repeated string urls = 1;
+}
+
+message PopQueueReply{
+    string url = 1;
+}
+
+message RangeReply{
+    repeated string urls = 1;
+}
+
+message SisMemberRequest{
+    string url = 1;
+}
+
+message SisMemberReply{
+    bool isExist = 1;
+}
+
+message SadDRequest{
+    repeated string crawledURL = 1;
+}
